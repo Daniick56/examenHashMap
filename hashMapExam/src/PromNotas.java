@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -19,19 +20,19 @@ public class PromNotas {
                 "1. Ingreso notas de estudiantes.\n" +
                 "2. Imprimir cantidad de estudiantes ingresados.\n" +
                 "3. Imprimir la cantidad de notas ingresadas.\n" +
-                "4. Cantidad de estudiantes que GANARON la materia.\n" +
+                "4. Estudiantes que GANARON la materia.\n" +
                 //pierden cuando su promedio es menor a 3.5
-                "5. Cantidad de estudiantes que PERDIERON la materia.\n" +
+                "5. Estudiantes que PERDIERON la materia.\n" +
                 //cuando la nota final es mayor de 2.0
-                "6. Cantidad de estudiantes que pueden recuperar.\n" +
-                "7. Cantidad de estudiantes que pierden sin recuperar.\n" +
+                "6. Estudiantes que PUEDEN recuperar.\n" +
+                "7. Estudiantes que pierden SIN recuperar.\n" +
                 "8. Promedio de las notas finales obtenidas.\n" +
                 "9. Imprimir el listado de estudiantes y sus notas finales.\n" +
                 "10. Salir\n";
         //validamos que mientras que la opcion no sea la de salir (10) el menú continúe ejecutandose
         do {
             System.out.println(mensaje);
-            System.out.println("Ingresa la opción: \n");
+            System.out.println("Ingresa la opción:");
             option = input.nextInt();
             validacionMenu(option);
         } while (option != 10);
@@ -46,19 +47,19 @@ public class PromNotas {
                 System.out.println("\nLa cantidad de estudiantes ingresados son: " + countStudents());
                 break;
             case 3:
-                System.out.println("\nLa cantidad de notas ingresadas son: " + countGrades());
+                System.out.println("\nLa cantidad total de notas ingresadas son: " + countGrades());
                 break;
             case 4:
-                System.out.println("\nLa cantidad de estudiantes que GANARON la materia son: " + wonSubject());
+                wonSubject();
                 break;
             case 5:
-                System.out.println("\nLa cantidad de estudiantes que PERDIERON la materia son: " + failedSubject());
+                failedSubject();
                 break;
             case 6:
-                System.out.println("\nLa cantidad de estudiantes que PUEDEN recuperar es : " + canRecover());
+                canRecover();
                 break;
             case 7:
-                System.out.println("\nLa cantidad de estudiantes que pierden sin recuperar es : " + cannotRecover());
+                cannotRecover();
                 break;
             case 8:
                 int cantidadNotas = countGrades();
@@ -80,45 +81,61 @@ public class PromNotas {
         }
         return sum/cantidadNotas;
     }
-    //metodo que retorna la cantidad de personas que no pueden recupererar, por ende pierden la materia
-    private int cannotRecover() {
-        int sum = 0;
-        for (Double counterValue : studentsGrades.values()) {
-            if (counterValue <= 2.0) {
-                sum++;
+    //metodo que imorime los estudiantes que no pueden recupererar, por ende pierden la materia
+    private void cannotRecover() {
+        System.out.println("Estudiantes que pierden la materia y no pueden recuperar: \n");
+
+        Iterator<String> keyIterator = studentsGrades.keySet().iterator();
+
+        while (keyIterator.hasNext()) {
+            String keys = keyIterator.next();
+            //key=keys || value: studentsGrades.get(keys);
+            if (studentsGrades.get(keys) < 2.0) {
+                System.out.println("- " + keys);
             }
         }
-        return sum;
     }
-    //metodo que retorna la cantidad de personas que perdieron la materia pero pueden recuperar la materia
-    private int canRecover() {
-        int sum = 0;
-        for (Double counterValue : studentsGrades.values()) {
-            if (counterValue > 2.0 && counterValue < 3.5) {
-                sum++;
+    //metodo que imprime los estudiantes que perdieron la materia pero pueden recuperarla
+    private void canRecover() {
+        System.out.println("Estudiantes que perdieron pero pueden recuperar la materia: \n");
+
+        Iterator<String> keyIterator = studentsGrades.keySet().iterator();
+
+        while (keyIterator.hasNext()) {
+            String keys = keyIterator.next();
+            //key=keys || value: studentsGrades.get(keys);
+            if (studentsGrades.get(keys) > 2.0 && studentsGrades.get(keys) < 3.5) {
+                System.out.println("- " + keys);
             }
         }
-        return sum;
     }
-    //metodo que retorna la cantidad de personas que perdieron la materia
-    private int failedSubject() {
-        int sumFailers = 0;
-        for (Double counterValue : studentsGrades.values()) {
-            if (counterValue < 3.5) {
-                sumFailers++;
+    //metodo que imprime las personas que perdieron la materia
+    private void failedSubject() {
+        System.out.println("Estudiantes que PERDIERON la materia: \n");
+
+        Iterator<String> keyIterator = studentsGrades.keySet().iterator();
+
+        while (keyIterator.hasNext()) {
+            String keys = keyIterator.next();
+            //key=keys || value: studentsGrades.get(keys);
+            if (studentsGrades.get(keys) < 3.5) {
+                System.out.println("- " + keys);
             }
         }
-        return sumFailers;
     }
-    //metodo que retorna la cantidad de estudiantes que aprobaron la materia
-    private int wonSubject() {
-        int sumWinners = 0;
-        for (Double counterValue : studentsGrades.values()) {
-            if (counterValue >= 3.5) {
-                sumWinners++;
+    //metodo que imprime los estudiantes que ganaron la materia
+    private void wonSubject() {
+        System.out.println("Estudiantes que GANARON la materia: \n");
+
+        Iterator<String> keyIterator = studentsGrades.keySet().iterator();
+
+        while (keyIterator.hasNext()) {
+            String keys = keyIterator.next();
+            //key=keys || value: studentsGrades.get(keys);
+            if (studentsGrades.get(keys) >= 3.5) {
+                System.out.println("- " + keys);
             }
         }
-        return sumWinners;
     }
     //metodo que retorna la cantidad de notas ingresadas por los usuarios
     private int countGrades() {
