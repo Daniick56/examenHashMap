@@ -13,7 +13,6 @@ public class PromNotas {
 
     //proyeccion del menu para la eleccion del usuario:
     public void menu() {
-
         int option = 0;
         String mensaje = "\n            ####MENU DE OPCIONES####\n\n" +
                 //el ingreso debe ser validado para que esté en un rango de 1-5
@@ -29,16 +28,15 @@ public class PromNotas {
                 "8. Promedio de las notas finales obtenidas.\n" +
                 "9. Imprimir el listado de estudiantes y sus notas finales.\n" +
                 "10. Salir\n";
-
+        //validamos que mientras que la opcion no sea la de salir (10) el menú continúe ejecutandose
         do {
             System.out.println(mensaje);
             System.out.println("Ingresa la opción: \n");
             option = input.nextInt();
             validacionMenu(option);
         } while (option != 10);
-
     }
-
+    //metodo para la proyeccion del menú que toma como argumento la opcion ingresada por el ususario
     private void validacionMenu(int option) {
         switch (option) {
             case 1:
@@ -72,10 +70,9 @@ public class PromNotas {
             case 10:
                 System.out.println("         SALIENDO DEL SISTEMA...");
                 break;
-
         }
     }
-
+    //metodo que recibe como argumento la cantidad de notas y retorna el promedio de las notas
     private double getPromedioFinalGrades(int cantidadNotas) {
         double sum = 0;
         for (Double counterValue : studentsGrades.values()) {
@@ -83,7 +80,7 @@ public class PromNotas {
         }
         return sum/cantidadNotas;
     }
-
+    //metodo que retorna la cantidad de personas que no pueden recupererar, por ende pierden la materia
     private int cannotRecover() {
         int sum = 0;
         for (Double counterValue : studentsGrades.values()) {
@@ -93,7 +90,7 @@ public class PromNotas {
         }
         return sum;
     }
-
+    //metodo que retorna la cantidad de personas que perdieron la materia pero pueden recuperar la materia
     private int canRecover() {
         int sum = 0;
         for (Double counterValue : studentsGrades.values()) {
@@ -103,7 +100,7 @@ public class PromNotas {
         }
         return sum;
     }
-
+    //metodo que retorna la cantidad de personas que perdieron la materia
     private int failedSubject() {
         int sumFailers = 0;
         for (Double counterValue : studentsGrades.values()) {
@@ -113,7 +110,7 @@ public class PromNotas {
         }
         return sumFailers;
     }
-
+    //metodo que retorna la cantidad de estudiantes que aprobaron la materia
     private int wonSubject() {
         int sumWinners = 0;
         for (Double counterValue : studentsGrades.values()) {
@@ -123,7 +120,7 @@ public class PromNotas {
         }
         return sumWinners;
     }
-
+    //metodo que retorna la cantidad de notas ingresadas por los usuarios
     private int countGrades() {
         int sum = 0;
         for (double counterValue : studentsGrades.values()) {
@@ -131,7 +128,7 @@ public class PromNotas {
         }
         return sum;
     }
-
+    //metodo que retorna la cantidad de estudiantes ingresados en el sistema
     private int countStudents() {
         int sum = 0;
         for (String counterKey : studentsGrades.keySet()) {
@@ -139,14 +136,15 @@ public class PromNotas {
         }
         return sum;
     }
-
+    //metodo que imprime los datos ingresados
     private void printStudentsGrades() {
         System.out.println("            ####DATOS INGRESADOS####");
         for (Map.Entry<String, Double> entry : studentsGrades.entrySet()){
             System.out.println("\nESTUDIANTE: " + entry.getKey() + "\nNOTA FINAL: " + entry.getValue());
         }
     }
-
+    //metodo que pide a los usuarios la cantidad de estudiantes a ingresar, las notas de cada uno de ellos
+    //y los agrega como keys y values en el HashMap principal.
     private void addGrades() {
         System.out.println("\nIngresa la cantidad de estudiantes a ingresar sus notas: ");
         int cantidadEstudiantes = input.nextInt();
@@ -163,7 +161,7 @@ public class PromNotas {
             studentsGrades.put(name, notaFinal);
         }
     }
-
+    //metodo que recibe la cantidad de notas, pide las notas y retorna el promedio de las notas
     private double getPromedioNotas(int cantidadNotas) {
         double sum = 0;
         for (int i = 0; i < cantidadNotas; i++) {
