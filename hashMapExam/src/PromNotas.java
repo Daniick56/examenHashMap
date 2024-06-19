@@ -126,7 +126,7 @@ public class PromNotas {
         for (double counterValue : studentsGrades.values()) {
             sum++;
         }
-        return sum;
+        return sum*cantidadNotas;
     }
     //metodo que retorna la cantidad de estudiantes ingresados en el sistema
     private int countStudents() {
@@ -167,7 +167,7 @@ public class PromNotas {
         for (int i = 0; i < cantidadNotas; i++) {
             System.out.println("Ingresa la nota " + (i+1));
             double nota = input.nextDouble();
-            if (nota < 1 || nota > 5) {
+            if (nota < 0 || nota > 5) {
                 System.out.println("Error: Ingresa una nota en el rango 1-5\n");
                 i--;
                 continue;
