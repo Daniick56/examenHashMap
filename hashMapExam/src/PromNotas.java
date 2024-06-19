@@ -44,28 +44,60 @@ public class PromNotas {
                 addGrades();
                 break;
             case 2:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 System.out.println("\nLa cantidad de estudiantes ingresados son: " + countStudents());
                 break;
             case 3:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 System.out.println("\nLa cantidad total de notas ingresadas son: " + countGrades());
                 break;
             case 4:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 wonSubject();
                 break;
             case 5:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 failedSubject();
                 break;
             case 6:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 canRecover();
                 break;
             case 7:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 cannotRecover();
                 break;
             case 8:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 int cantidadNotas = countGrades();
                 System.out.println("\nEl promedio de las notas finales obtenidas es: " + getPromedioFinalGrades(cantidadNotas));
                 break;
             case 9:
+                if (vericarArrayVacio()) {
+                    System.out.println("\nERROR: No se ha ingresado ningun dato.");
+                    break;
+                }
                 printStudentsGrades();
                 break;
             case 10:
@@ -73,6 +105,14 @@ public class PromNotas {
                 break;
         }
     }
+    //metodo que veridica si el hashmap se encuentra vacio y devuelve un valor booleano.
+    private boolean vericarArrayVacio() {
+        if (studentsGrades.size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
     //metodo que recibe como argumento la cantidad de notas y retorna el promedio de las notas
     private double getPromedioFinalGrades(int cantidadNotas) {
         double sum = 0;
