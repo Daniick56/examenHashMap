@@ -214,16 +214,23 @@ public class PromNotas {
             //obteniendo el promedio del estudiante (value) :
             double notaFinal = getPromedioNotas(cantidadNotas);
 
-            //llamando al metodo que me retorna el numero limitado a un solo numero despues de la parte entera.
-            double notaFinalFixed = recortarDouble(notaFinal);
+            //llamando al metodo que me retorna el numero limitado al numero que quiera el usuario despues de la parte entera.
+            double notaFinalFixed = recortarDouble(notaFinal, 1);
 
             //añadiendo las keys y values del hashmap segun los datos obtenidos:
             studentsGrades.put(name, notaFinalFixed);
         }
     }
 
-    private double recortarDouble(double notaFinal) {
-        return Math.floor(notaFinal * 10) /10.0;
+    private double recortarDouble(double notaFinal, int size) {
+        String one = "1";
+        StringBuilder zeros = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            zeros.append("0");
+        }
+        int number = Integer.parseInt(one + zeros);
+        double number2 = Double.parseDouble(one + zeros);
+        return Math.floor(notaFinal * number) /number2;
     }
 
     //metodo que recibe la cantidad de notas, pide las notas y retorna el promedio de las notas
