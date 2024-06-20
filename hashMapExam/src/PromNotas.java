@@ -107,7 +107,7 @@ public class PromNotas {
     }
     //metodo que veridica si el hashmap se encuentra vacio y devuelve un valor booleano.
     private boolean vericarArrayVacio() {
-        if (studentsGrades.size() == 0) {
+        if (studentsGrades.isEmpty()) {
             return true;
         }
         return false;
