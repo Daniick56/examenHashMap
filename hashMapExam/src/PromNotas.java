@@ -12,8 +12,20 @@ public class PromNotas {
     //declaracion de cantidad de notas a promediar:
     final int cantidadNotas = 3;
 
+    //inicializacion de cantidad de decimales a utilizar:
+    int decimalSize;
+
     //proyeccion del menu para la eleccion del usuario:
     public void menu() {
+        //pidiendo la cantidad de decimales a utilizar en las notas:
+        System.out.println("\nAntes de empezar, ingresa la cantidad de decimales que vas a utilizar en las notas.\n" +
+                "Ejemplo:\n" +
+                "1 = 3.5\n" +
+                "2 = 3.54\n" +
+                "3 = 3.546\n" +
+                "Etc...");
+        decimalSize = input.nextInt();
+
         int option = 0;
         String mensaje = "\n            ####MENU DE OPCIONES####\n\n" +
                 //el ingreso debe ser validado para que esté en un rango de 1-5
@@ -215,7 +227,7 @@ public class PromNotas {
             double notaFinal = getPromedioNotas(cantidadNotas);
 
             //llamando al metodo que me retorna el numero limitado al numero que quiera el usuario despues de la parte entera.
-            double notaFinalFixed = recortarDouble(notaFinal, 1);
+            double notaFinalFixed = recortarDouble(notaFinal, decimalSize);
 
             //añadiendo las keys y values del hashmap segun los datos obtenidos:
             studentsGrades.put(name, notaFinalFixed);
